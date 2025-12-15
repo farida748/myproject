@@ -1,0 +1,17 @@
+FROM alpine
+
+WORKDIR /app
+
+COPY app.py .
+
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    build-base \
+    libffi-dev \
+    openssl-dev
+
+
+RUN pip3 install --no-cache-dir -r requirements.txt || echo "No requirements.txt"
+
+CMD ["python3", "app.py"]
